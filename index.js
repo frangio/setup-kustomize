@@ -1,7 +1,7 @@
 import core from '@actions/core';
 import tc from '@actions/tool-cache';
 
-const version = '3.5.4';
+const version = core.getInput('version');
 
 async function run() {
   try {

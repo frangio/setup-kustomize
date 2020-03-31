@@ -4621,7 +4621,7 @@ var toolCache_7 = toolCache.cacheFile;
 var toolCache_8 = toolCache.find;
 var toolCache_9 = toolCache.findAllVersions;
 
-const version = '3.5.4';
+const version = core$1.getInput('version');
 
 async function run() {
   try {
