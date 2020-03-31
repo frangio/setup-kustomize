@@ -3,7 +3,6 @@ description: Install a specific version of Kustomize and add it to the PATH
 inputs:
   version:
     description: Version to install
-    required: true
     default: '3.5.4'
 runs:
   using: node12
