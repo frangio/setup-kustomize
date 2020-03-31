@@ -8,5 +8,5 @@ Install Kustomize in GitHub Actions.
 steps:
 - uses: frangio/setup-kustomize@v1
   with:
-    version: 3.5.4 # (optional)
+    version: 3.5.4 # optional
 ```
