@@ -1,16 +1,26 @@
 import core from '@actions/core';
 import tc from '@actions/tool-cache';
 
-const version = core.getInput('version');
+function getPlatform() {
+  const { platform } = process;
+  if (platform === 'win32') {
+    return 'windows';
+  } else {
+    return platform;
+  }
+}
 
 async function run() {
+  const version = core.getInput('version');
+  const platform = getPlatform();
+
   try {
-    let cachedPath = tc.find('kustomize', version);
+    let cachedPath = tc.find('kustomize', version, platform);
 
     if (!cachedPath) {
-      const archive = await tc.downloadTool(`https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${version}/kustomize_v${version}_linux_amd64.tar.gz`);
+      const archive = await tc.downloadTool(`https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${version}/kustomize_v${version}_${platform}_amd64.tar.gz`);
       const path = await tc.extractTar(archive);
-      cachedPath = await tc.cacheDir(path, 'kustomize', version);
+      cachedPath = await tc.cacheDir(path, 'kustomize', version, platform);
     }
 
     core.addPath(cachedPath);
